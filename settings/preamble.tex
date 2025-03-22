@@ -8,6 +8,7 @@ times new roman % use Times New Roman font as main
 \usepackage[T2A]{fontenc} % поддержка кириллицы
 \usepackage[utf8]{inputenc} % кодировка исходного текста
 \usepackage[english,russian]{babel} % переключение языков
+\usepackage{lmodern} % проблема со шрифтами
 
 % Геометрия страницы и графика
 \usepackage[left=3cm, right=1cm, top=2cm, bottom=2cm]{geometry} % поля страницы
@@ -23,6 +24,7 @@ times new roman % use Times New Roman font as main
 \usepackage{bm} % полужирное начертание для математических символов
 \usepackage{amsmath} % дополнительные математические возможности
 \usepackage{amssymb} % дополнительные математические символы
+\usepackage{algorithmic} % описание алгоритмов
 
 % Библиография и ссылки
 \usepackage{cite} % поддержка цитирования
@@ -39,9 +41,9 @@ times new roman % use Times New Roman font as main
 \usepackage{listings} % поддержка вставки исходного кода
 
 % Установка шрифта Times New Roman
-% \renewcommand{\rmdefault}{ftm}
-% \usepackage{fontspec}
-% \setmainfont{Times New Roman}
+\renewcommand{\rmdefault}{ftm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
 
 % Создание нового типа столбца для выравнивания содержимого по центру
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
@@ -74,11 +76,14 @@ times new roman % use Times New Roman font as main
 \usepackage{enumitem}
 \setlist{leftmargin=20mm}
 
+%дополнительные математические операторы
+\DeclareMathOperator{\diag}{diag}
+
 % метаданные PDF
 \hypersetup{
-	pdfauthor={Полузёров Т. Д.},
-	pdftitle={Модель индивидуальных рисков для портфеля однородных кредитов},
-	pdfkeywords={СПИСОК КЛЮЧЕВЫХ СЛОВ, КАСАЮЩИХСЯ ТЕМЫ РАБОТЫ},
-	pdfsubject={Модели, Риски},
+	pdfauthor={Новиков А.А.},
+	pdftitle={Алгоритмы глубокого обучения для предсказания структуры белковых комплексов},
+	pdfkeywords={},
+	pdfsubject={},
 	pdfcreator={xelatex},
 	pdflang={Russian}}
