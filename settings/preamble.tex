@@ -8,7 +8,7 @@ times new roman % use Times New Roman font as main
 \usepackage[T2A]{fontenc} % поддержка кириллицы
 \usepackage[utf8]{inputenc} % кодировка исходного текста
 \usepackage[english,russian]{babel} % переключение языков
-% \usepackage{lmodern} % проблема со шрифтами
+\usepackage{textgreek} % греческие букву в текстовом режиме
 
 % Геометрия страницы и графика
 \usepackage[left=3cm, right=1cm, top=2cm, bottom=2cm]{geometry} % поля страницы
@@ -42,10 +42,6 @@ times new roman % use Times New Roman font as main
 
 % Установка шрифта Times New Roman
 \usepackage{tempora}
-%\usepackage{mathptmx}
-% \renewcommand{\rmdefault}{ftm}
-% \usepackage{fontspec}
-% \setmainfont{Times New Roman}
 
 % Создание нового типа столбца для выравнивания содержимого по центру
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
@@ -80,6 +76,9 @@ times new roman % use Times New Roman font as main
 
 %дополнительные математические операторы
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Sqrt}{sqrt}
+\DeclareMathOperator{\const}{const}
+\DeclareMathOperator{\argmin}{argmin}
 
 % метаданные PDF
 \hypersetup{
