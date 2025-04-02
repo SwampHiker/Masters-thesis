@@ -11,7 +11,7 @@ times new roman % use Times New Roman font as main
 \usepackage{textgreek} % греческие букву в текстовом режиме
 
 % Геометрия страницы и графика
-\usepackage[left=3cm, right=1cm, top=2cm, bottom=2cm]{geometry} % поля страницы
+\usepackage[a4paper, left=3cm, right=15mm, top=2cm, bottom=2cm]{geometry} % поля страницы
 \usepackage{graphicx} % подключение графики
 \usepackage{pdfpages} % вставка pdf-страниц
 
@@ -28,7 +28,9 @@ times new roman % use Times New Roman font as main
 
 % Библиография и ссылки
 \usepackage{cite} % поддержка цитирования
-\usepackage[hidelinks]{hyperref} % создание гиперссылок
+%\usepackage[hidelinks]{hyperref} % создание гиперссылок
+\let\oldref\ref
+\renewcommand{\ref}[1]{(\oldref{#1})} % скобки вокруг ссылок
 
 % Прочее
 \usepackage{color} % работа с цветом
@@ -36,7 +38,7 @@ times new roman % use Times New Roman font as main
 \usepackage{multirow} % объединение ячеек таблиц по вертикали
 \usepackage{afterpage} % вставка материала после текущей страницы
 \usepackage[font={normal}]{caption} % настройка подписей к рисункам и таблицам
-\usepackage[onehalfspacing]{setspace} % полуторный интервал
+\usepackage[singlespacing]{setspace} % один межстрочный интервал
 \usepackage{fancyhdr} % установка колонтитулов
 \usepackage{listings} % поддержка вставки исходного кода
 
@@ -52,12 +54,10 @@ times new roman % use Times New Roman font as main
 \fancyhf{}              % Очистка текущих значений колонтитулов
 \fancyfoot[C]{\thepage} % Установка номера страницы в нижнем колонтитуле по центру
 \renewcommand{\headrulewidth}{0pt} % Удаление разделительной линии в верхнем колонтитуле
+\setlength{\parindent}{1.25cm} % Установка абзацного отступа
 
 % Настройка подписей к изображениям и таблицам
 \captionsetup{format=hang,labelsep=period}
-
-% Использование полужирного начертания для векторов
-% \let\vec=\mathbf
 
 % Установка глубины оглавления
 \setcounter{tocdepth}{2}
@@ -72,7 +72,7 @@ times new roman % use Times New Roman font as main
 
 %сдвиг в списк
 \usepackage{enumitem}
-\setlist{leftmargin=20mm}
+\setlist{leftmargin=12.5mm}
 
 %дополнительные математические операторы
 \DeclareMathOperator{\diag}{diag}
@@ -81,10 +81,10 @@ times new roman % use Times New Roman font as main
 \DeclareMathOperator{\argmin}{argmin}
 
 % метаданные PDF
-\hypersetup{
-	pdfauthor={Новиков А.А.},
-	pdftitle={Алгоритмы глубокого обучения для предсказания структуры белковых комплексов},
-	pdfkeywords={},
-	pdfsubject={},
-	pdfcreator={pdflatex},
-	pdflang={Russian}}
+%\hypersetup{
+%	pdfauthor={Новиков А.А.},
+%	pdftitle={Алгоритмы глубокого обучения для предсказания структуры белковых комплексов},
+%	pdfkeywords={},
+%	pdfsubject={},
+%	pdfcreator={pdflatex},
+%	pdflang={Russian}}
