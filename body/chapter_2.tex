@@ -230,16 +230,88 @@ $U = [u_1, ..., u_n]^\mathrm{T}$. Тогда имея некоторую пос�
 Формулу \ref{scalar_F} можно переписать так:
 \begin{equation}
 	v = F(C_{rel}, A) = T_{X}G(C_{rel}, A)\begin{bmatrix} \frac{1}{m} \\ ... \\ \frac{1}{m} \end{bmatrix}.
-	\label{scalar_F}
+	\label{vector_F}
 \end{equation}
 
 В общем и целом векторные поля, заданные таким образом, мало отличаются от скалярных. Главным отличием здесь является чувствительность к поворотам в пространстве,
 что добавляет некоторых трудностей при обучении задаче предсказания взаимодействия белков. При этом модель оказывается не на много лучше мультискалярной модели.
 
-% \subsection{Поле, заданное матрицей}
-% Я думаю, для отчёта пока хватит и этого. 
+\subsection{Поле, заданное матрицей}
+Для описания данного поля, следует, для начала, обратиться к общей формулировке векторного поля \cite{field_theory}:
+\begin{equation}
+	A(x_1, x_2, x_3, x_4) = \begin{bmatrix} A_1(x) \\ A_2(x) \\ A_3(x) \\ A_4(x) \end{bmatrix}.
+	\label{vec_A}
+\end{equation}
+Для \ref{vec_A} имеется следующий вид лагранжиана:
+\begin{equation}
+	L(x) = \alpha\sum_{i}A^2_i + a\sum_{ij}{\left(\frac{\partial A_i}{\partial x_j}\right)}^2 + b\sum_{i}{\left(\frac{\partial A_i}{\partial x_i}\right)}^2 + c\sum_{ij}\frac{\partial A_i}{\partial x_j}\frac{\partial A_j}{\partial x_i}. 
+	\label{general_A_lagr}
+\end{equation}
+Если записать матрицу производных:
+\begin{equation}
+	\nabla A(x_1, x_2, x_3, x_4) = \begin{bmatrix}
+	\frac{\partial A_1}{\partial x_1} & \frac{\partial A_1}{\partial x_2} & \frac{\partial A_1}{\partial x_3} & \frac{\partial A_1}{\partial x_4} \\
+	\frac{\partial A_2}{\partial x_1} & \frac{\partial A_2}{\partial x_2} & \frac{\partial A_2}{\partial x_3} & \frac{\partial A_2}{\partial x_4} \\
+	\frac{\partial A_3}{\partial x_1} & \frac{\partial A_3}{\partial x_2} & \frac{\partial A_3}{\partial x_3} & \frac{\partial A_3}{\partial x_4} \\
+	\frac{\partial A_4}{\partial x_1} & \frac{\partial A_4}{\partial x_2} & \frac{\partial A_4}{\partial x_3} & \frac{\partial A_4}{\partial x_4}
+ \end{bmatrix},
+	\label{dA}
+\end{equation}
+то \ref{general_A_lagr} можно записать в матричном виде как:
+\begin{equation}
+	L(x) = \alpha A^\mathrm{T}A + a\tr{\nabla A}^\mathrm{T}\nabla A + b\tr{\left[\nabla A\right]}^2 + c\tr{\nabla A}^2.
+	\label{mtrx_A_lagr}
+\end{equation}
+Для электро-магнитного поля, согласно \cite{field_theory}, \ref{general_A_lagr} принимает вид:
+\begin{equation}
+	L(x) = -\frac{1}{2}\left(\sum_{ij}{\left(\frac{\partial A_i}{\partial x_j}\right)}^2 - \sum_{ij}\frac{\partial A_i}{\partial x_j}\frac{\partial A_j}{\partial x_i}\right), 
+	\label{general_electro_lagr}
+\end{equation}
+что в матричном виде записывается как:
+\begin{equation}
+	L(x) = -\frac{1}{2}\left(\tr{\nabla A}^\mathrm{T}\nabla A - \tr{\nabla A}^2\right) = -\frac{1}{2}\tr\left(({\nabla A}^\mathrm{T} - \nabla A)\nabla A\right).
+	\label{mtrx_electro_lagr}
+\end{equation}
 
+Теперь, если имеется некоторая матрица $B$, которую аналогично \ref{vector_F} записать как:
+\begin{equation}
+	B = F(C_{rel}, A) = T_XG(C_{rel}, A)T_X^\mathrm{T} = T_XC_{rel, B}T_X^\mathrm{T},
+	\label{mtrx_F}
+\end{equation}
+после чего переписать \ref{mtrx_electro_lagr} как:
+\begin{equation}
+	L(x) = -\left(\tr B^\mathrm{T}B - \tr B^2\right) = \tr\left((B - B^\mathrm{T})B\right).
+	\label{mtrx_lagr}
+\end{equation}
+Легко видеть, что выражение \ref{mtrx_lagr} -- Лоренц-инвариантно:
+\begin{equation}
+	L(x) = \tr {(SBS^\mathrm{T})}^2 - \tr (SB^\mathrm{T}S^\mathrm{T})(SBS^\mathrm{T}) = \tr B^2 - \tr B^\mathrm{T}B.
+	\label{mtrx_lagr_invar}
+\end{equation}
 
+С практической точки зрения, более интересен частичный лагранжиан этого поля, получаемый от взаимодействия двух матричных полей $A$ и $B$:
+\begin{equation}
+	L_{partial}(A, B) = L(A + B) - L(A) - L(B),
+	\label{mtrx_partial0}
+\end{equation}
+\begin{align}
+	L(A + B) &= \tr\left((A + B - A^\mathrm{T} - B^\mathrm{T})(A + B)\right) = \notag \\
+			 &= \tr\left(((A - A^\mathrm{T}) + (B - B^\mathrm{T}))(A + B)\right) = \notag \\
+			 &= \tr\left((A - A^\mathrm{T})A\right) + \tr\left((B - B^\mathrm{T})B\right) + \notag \\
+			 &+ \tr\left((A - A^\mathrm{T})B\right) + \tr\left((B - B^\mathrm{T})A\right) = \notag \\
+			 &= L(A) + L(B) + \tr AB + \tr BA - \tr A^\mathrm{T}B - \tr B^\mathrm{T}A = \notag \\
+			 &= L(A) + L(B) + 2\tr AB - 2\tr A^\mathrm{T}B = \notag \\
+			 &= L(A) + L(B) +2\tr\left((A - A^\mathrm{T})B\right)
+	\label{mtrx_partial1}
+\end{align}
+\begin{equation}
+	L_{partial}(A, B) = 2\tr\left((A - A^\mathrm{T})B\right).
+	\label{mtrx_partial}
+\end{equation}
+Легко видеть некоторую однородность между \ref{mtrx_lagr} и \ref{mtrx_partial}. 
 
+Модели, задаваемые \ref{mtrx_lagr} получаются наиболее интересными. Также, как и с \ref{L_multiscalar}, можно усложнить модель, используя сумму нескольких полей. По своему построению, данное поле крайне близко к электромагнитному, но не требует использования операции дифференцирования. Кроме того, кодировка матрицы с помощью  $C_{rel, B}$ оказвается более естественным, чем кодировки вектора с помощью $C_{rel, v}$.
 
-
+\section{Интегрирование по интерфейсу}
+Описанные сверху лагранжианы, должны, в общем случае \ref{action_function} -- интегрироваться по всему пространству-времени, а в упрощённом \ref{action_function_two} -- интегрироваться по всему пространству.
+% to be continued
